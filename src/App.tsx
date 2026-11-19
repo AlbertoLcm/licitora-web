@@ -70,8 +70,8 @@ function App() {
       <Sidebar activeView={activeView} setActiveView={setActiveView} open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="min-h-screen lg:pl-[264px]">
         <Header onMenu={() => setSidebarOpen(true)} onSearch={() => openSearch()} notificationsOpen={notificationsOpen} setNotificationsOpen={setNotificationsOpen} />
-        <main className="px-4 pb-10 pt-6 sm:px-6 lg:px-8 lg:pt-7">
-          <div className="mx-auto max-w-[1024px]">
+        <main className="relative px-4 pb-10 pt-6 sm:px-6 lg:px-8 lg:pt-7" aria-disabled="true">
+          <div className="pointer-events-none mx-auto max-w-[1024px] select-none opacity-55 grayscale-[0.35]">
             <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{meta.eyebrow}</p>
@@ -90,6 +90,9 @@ function App() {
             {activeView === 'historial' && <HistoryPage />}
             {activeView === 'equipo' && <TeamPage />}
           </div>
+          <div className="pointer-events-none absolute inset-x-0 top-6 z-10 flex justify-center sm:top-7">
+            <span className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-amber-800 shadow-sm">Módulos en desarrollo · Licitora está disponible en el buscador</span>
+          </div>
         </main>
       </div>
 
@@ -97,7 +100,7 @@ function App() {
       <NewTenderDialog open={newTenderOpen} onClose={() => setNewTenderOpen(false)} onSuccess={setToast} documentMode={documentMode} />
 
       {toast && <div className="fixed bottom-5 right-5 z-[60] flex items-center gap-3 rounded-xl bg-midnight px-4 py-3 text-xs font-semibold text-white shadow-2xl animate-slide-up"><span className="grid h-6 w-6 place-items-center rounded-full bg-brand-500"><Check className="h-3.5 w-3.5" /></span>{toast}</div>}
-      <button type="button" className="fixed bottom-5 left-5 z-10 hidden h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-400 shadow-lg transition hover:text-brand-600 lg:grid" aria-label="Ayuda"><CircleHelp className="h-[18px] w-[18px]" /></button>
+      <button type="button" disabled title="Ayuda: en desarrollo" className="fixed bottom-5 left-5 z-10 hidden h-10 w-10 cursor-not-allowed place-items-center rounded-full border border-slate-200 bg-white text-slate-300 shadow-lg lg:grid" aria-label="Ayuda en desarrollo"><CircleHelp className="h-[18px]" /></button>
     </div>
   )
 }

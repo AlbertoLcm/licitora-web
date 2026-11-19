@@ -27,7 +27,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       {!compact && (
         <div>
           <div className="flex items-center gap-1.5 text-[17px] font-bold tracking-[-0.03em] text-white">
-            Oltech <span className="font-medium text-brand-300">Atlas</span>
+            Oltech <span className="font-medium text-brand-300">Licitora</span>
           </div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">Tender intelligence</p>
         </div>
@@ -47,11 +47,6 @@ export function Sidebar({
   open: boolean
   onClose: () => void
 }) {
-  const navigate = (view: ViewId) => {
-    setActiveView(view)
-    onClose()
-  }
-
   return (
     <>
       <div
@@ -77,16 +72,17 @@ export function Sidebar({
               <button
                 type="button"
                 key={item.id}
-                onClick={() => navigate(item.id)}
-                className={`group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13px] font-medium transition-all ${
+                disabled
+                title="Módulo en desarrollo"
+                className={`group flex w-full cursor-not-allowed items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13px] font-medium opacity-45 ${
                   active
                     ? 'bg-white/[0.09] text-white shadow-inner ring-1 ring-white/[0.06]'
-                    : 'text-slate-400 hover:bg-white/[0.05] hover:text-slate-100'
+                    : 'text-slate-400'
                 }`}
               >
-                <Icon className={`h-[18px] w-[18px] ${active ? 'text-brand-400' : 'text-slate-500 group-hover:text-slate-300'}`} strokeWidth={1.9} />
+                <Icon className={`h-[18px] w-[18px] ${active ? 'text-brand-400' : 'text-slate-500'}`} strokeWidth={1.9} />
                 <span className="flex-1">{item.label}</span>
-                {item.badge && <span className="rounded-full bg-brand-400/15 px-2 py-0.5 text-[10px] font-bold text-brand-300">{item.badge}</span>}
+                <span className="rounded-full bg-white/[0.08] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wide text-slate-400">En desarrollo</span>
               </button>
             )
           })}
@@ -94,17 +90,18 @@ export function Sidebar({
           <p className="mb-2 mt-7 px-3 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-600">Organización</p>
           <button
             type="button"
-            onClick={() => navigate('equipo')}
-            className={`group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13px] font-medium transition-all ${
+            disabled
+            title="Módulo en desarrollo"
+            className={`group flex w-full cursor-not-allowed items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13px] font-medium opacity-45 ${
               activeView === 'equipo' ? 'bg-white/[0.09] text-white' : 'text-slate-400 hover:bg-white/[0.05] hover:text-slate-100'
             }`}
           >
             <Users className="h-[18px] w-[18px] text-slate-500" strokeWidth={1.9} />
-            Equipo
+            <span className="flex-1">Equipo</span><span className="rounded-full bg-white/[0.08] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wide text-slate-400">En desarrollo</span>
           </button>
-          <button type="button" className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13px] font-medium text-slate-400 transition-all hover:bg-white/[0.05] hover:text-slate-100">
+          <button type="button" disabled title="Módulo en desarrollo" className="group flex w-full cursor-not-allowed items-center gap-3 rounded-xl px-3 py-2.5 text-left text-[13px] font-medium text-slate-400 opacity-45">
             <Settings className="h-[18px] w-[18px] text-slate-500" strokeWidth={1.9} />
-            Configuración
+            <span className="flex-1">Configuración</span><span className="rounded-full bg-white/[0.08] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wide text-slate-400">En desarrollo</span>
           </button>
         </nav>
 
@@ -161,12 +158,10 @@ export function Header({
       <div className="relative ml-auto">
         <button
           type="button"
-          onClick={() => {
-            setNotificationsOpen(!notificationsOpen)
-            setProfileOpen(false)
-          }}
-          className="relative grid h-10 w-10 place-items-center rounded-xl border border-slate-200 text-slate-500 transition hover:bg-slate-50 hover:text-ink"
-          aria-label="Notificaciones"
+          disabled
+          className="relative grid h-10 w-10 cursor-not-allowed place-items-center rounded-xl border border-slate-200 text-slate-300 opacity-60"
+          aria-label="Notificaciones en desarrollo"
+          title="Notificaciones: en desarrollo"
         >
           <Bell className="h-[18px] w-[18px]" />
           <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-rose-500 ring-2 ring-white" />
@@ -200,15 +195,13 @@ export function Header({
       <div className="relative">
         <button
           type="button"
-          onClick={() => {
-            setProfileOpen(!profileOpen)
-            setNotificationsOpen(false)
-          }}
-          className="flex items-center gap-2.5 rounded-xl p-1.5 pr-2 text-left transition hover:bg-slate-50"
+          disabled
+          title="Perfil: en desarrollo"
+          className="flex cursor-not-allowed items-center gap-2.5 rounded-xl p-1.5 pr-2 text-left opacity-55"
         >
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-xs font-bold text-white">AL</span>
           <span className="hidden md:block">
-            <span className="block text-xs font-semibold text-slate-800">Alberto López</span>
+            <span className="block text-xs font-semibold text-slate-800">Alberto Cruz</span>
             <span className="block text-[10px] text-slate-400">Administrador</span>
           </span>
           <ChevronDown className="hidden h-3.5 w-3.5 text-slate-400 md:block" />

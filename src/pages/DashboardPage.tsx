@@ -50,7 +50,7 @@ export function DashboardPage({ onNewTender, onSearch, navigate }: { onNewTender
                 <h2 className="text-base font-bold tracking-tight text-ink">Radar CompraMX</h2>
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-emerald-700"><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" /> Monitoreando</span>
               </div>
-              <p className="mt-1.5 max-w-xl text-xs leading-relaxed text-slate-500">Atlas encontró <strong className="font-bold text-slate-800">5 oportunidades relevantes</strong> hoy y descargó sus bases para evaluación. Tres esperan una decisión de tu equipo.</p>
+              <p className="mt-1.5 max-w-xl text-xs leading-relaxed text-slate-500">Licitora encontró <strong className="font-bold text-slate-800">5 oportunidades relevantes</strong> hoy y descargó sus bases para evaluación. Tres esperan una decisión de tu equipo.</p>
               <button type="button" onClick={() => navigate('monitor')} className="mt-4 inline-flex items-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-[11px] font-bold text-white transition hover:-translate-y-0.5 hover:bg-slate-800">Revisar oportunidades <ArrowRight className="h-3.5 w-3.5" /></button>
             </div>
           </div>
@@ -131,7 +131,7 @@ export function DashboardPage({ onNewTender, onSearch, navigate }: { onNewTender
               <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-400/15 text-brand-300 ring-1 ring-brand-300/10"><Bot className="h-5 w-5" /></span>
               <span className="flex items-center gap-1.5 rounded-full bg-white/[0.07] px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-brand-300"><span className="h-1.5 w-1.5 rounded-full bg-brand-400" /> En línea</span>
             </div>
-            <h2 className="mt-5 text-lg font-bold tracking-tight">Pregúntale a Atlas</h2>
+            <h2 className="mt-5 text-lg font-bold tracking-tight">Pregúntale a Licitora</h2>
             <p className="mt-1.5 text-xs leading-relaxed text-slate-400">Busca en 2,845 productos y más de 560 documentos técnicos.</p>
             <button type="button" onClick={() => onSearch()} className="mt-5 flex w-full items-center gap-2 rounded-xl border border-white/10 bg-white/[0.06] px-3.5 py-3 text-left text-xs text-slate-400 transition hover:border-brand-400/30 hover:bg-white/[0.09] hover:text-slate-200">
               <Sparkles className="h-4 w-4 text-brand-300" /> ¿Qué necesitas encontrar?
