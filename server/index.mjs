@@ -53,7 +53,7 @@ WITH candidates AS (
     COALESCE(d.document_type, 'Documento') AS source_type,
     c.page_number,
     COALESCE(c.clean_text, c.raw_text) AS fragment,
-    f.web_view_link AS url,
+    f.google_drive_file_id AS drive_file_id,
     c.embedding <=> $1::vector AS distance
   FROM document_chunks c
   JOIN drive_files f ON f.id = c.file_id
@@ -70,7 +70,7 @@ WITH candidates AS (
 
   SELECT
     'product', p.id::text, p.name, b.name, 'Producto', 'Producto', p.catalog_page,
-    COALESCE(NULLIF(p.search_text, ''), NULLIF(p.description, ''), p.name), f.web_view_link,
+    COALESCE(NULLIF(p.search_text, ''), NULLIF(p.description, ''), p.name), f.google_drive_file_id,
     p.embedding <=> $1::vector
   FROM products p
   LEFT JOIN drive_files f ON f.id = p.file_id
@@ -82,10 +82,11 @@ WITH candidates AS (
   SELECT
     'tender_item', ti.id::text,
     concat(t.tender_code, ' · ', t.procedure_number), NULL, 'Partida / historial',
-    concat('Partida · ', t.institution), NULL, ti.required_description, t.bases_path,
+    concat('Partida · ', t.institution), NULL, ti.required_description, f.google_drive_file_id,
     ti.embedding <=> $1::vector
   FROM tender_items ti
   JOIN tenders t ON t.id = ti.tender_id
+  LEFT JOIN drive_files f ON t.tender_code = 'LIC-' || upper(substr(encode(digest(f.id::text, 'sha256'), 'hex'), 1, 16))
   WHERE ti.embedding IS NOT NULL
 )
 SELECT * FROM candidates
@@ -103,7 +104,7 @@ function sourceFromRow(row) {
     type: row.source_type,
     page: row.page_number ? `Pág. ${row.page_number}` : null,
     fragment: row.fragment.slice(0, 900),
-    url: row.url || null,
+    url: row.drive_file_id ? `https://drive.google.com/open?id=${encodeURIComponent(row.drive_file_id)}` : null,
     similarity: Number((1 - Number(row.distance)).toFixed(3)),
   }
 }
